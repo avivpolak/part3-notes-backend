@@ -6,6 +6,7 @@ const helper = require("./blog_test_helpers");
 const api = supertest(app);
 
 const Blog = require("../models/blog");
+const { result } = require("lodash");
 
 test("dummy returns one", () => {
     const blogs = [];
@@ -160,12 +161,17 @@ describe("total likes", () => {
         await Promise.all(promiseArray);
     });
 
-    // test("notes are returned as json", async () => {
-    //     await api
-    //         .get("/api/notes")
-    //         .expect(200)
-    //         .expect("Content-Type", /application\/json/);
-    // });
+    test("blogs are returned as json", async () => {
+        await api
+            .get("/api/blogs")
+            .expect(200)
+            .expect("Content-Type", /application\/json/);
+    });
+    test("blogs have id", async () => {
+        // await api.get("/api/blogs").expect(response.body._id).toBeDefined();
+        const response = await api.get("/api/notes");
+        console.log(response.body);
+    });
 
     // test("all notes are returned", async () => {
     //     const response = await api.get("/api/notes");
