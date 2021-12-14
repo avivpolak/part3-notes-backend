@@ -1,14 +1,16 @@
-const mongoose = require("mongoose");
+
+const mongoose = require('mongoose')
 
 const noteSchema = new mongoose.Schema({
-    content: {
-        type: String,
-        required: true,
-        minlength: 5,
-    },
-    date: Date,
-    important: Boolean,
-});
+  content: {
+    type: String,
+    required: true,
+    minlength: 5
+  },
+  date: Date,
+  important: Boolean,
+})
+
 
 noteSchema.set("toJSON", {
     transform: (document, returnedObject) => {
