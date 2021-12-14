@@ -1,6 +1,8 @@
 const config = require("./utils/config");
 const express = require("express");
 const app = express();
+require("express-async-errors");
+
 const cors = require("cors");
 const notesRouter = require("./controllers/notes");
 const blogRouter = require("./controllers/blog");
@@ -31,5 +33,12 @@ app.use("/api", blogRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
+
+const listener = app.listen(config.PORT, () => {
+    logger.info(`Server running on port ${config.PORT}`);
+});
+app.killServer = () => {
+    listener.close();
+};
 
 module.exports = app;
