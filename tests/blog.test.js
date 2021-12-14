@@ -168,9 +168,9 @@ describe("total likes", () => {
             .expect("Content-Type", /application\/json/);
     });
     test("blogs have id", async () => {
-        // await api.get("/api/blogs").expect(response.body._id).toBeDefined();
-        const response = await api.get("/api/notes");
-        console.log(response.body);
+        const response = await api.get("/api/blogs");
+        console.log(response.body[0].id);
+        expect(response.body[0].id).not.toBeFalsy();
     });
 
     // test("all notes are returned", async () => {
